@@ -34,7 +34,7 @@ func GenerateSnapshot(service Snapshot) {
 
 	for _, container := range containers {
 		labels, _ := container.Labels(ctx)
-		if labels["io.kubernetes.container.name"] == service.Container {
+		if labels["io.kubernetes.pod.name"] == service.Container {
 			task, err := container.Task(ctx, cio.NewAttach(cio.WithStdio))
 			if err != nil {
 				panic(err)
