@@ -1,11 +1,15 @@
 package main
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"github.com/containerd/containerd"
 	"github.com/containerd/containerd/cio"
 	"github.com/containerd/containerd/namespaces"
 	"github.com/google/uuid"
+	"log"
+	"net/http"
 	"os"
 	"strconv"
 	"time"
@@ -47,7 +51,18 @@ func GenerateSnapshot(service Snapshot) {
 				panic(err)
 			}
 
-			//Here send to state manager
+			postBody, _ := json.Marshal(map[string]string{
+				"Service": service.Service,
+			})
+			responseBody := bytes.NewBuffer(postBody)
+			//Leverage Go's HTTP Post function to make request
+			fullUrl := GetStateManagerUrl() + "/"
+			resp, err := http.Post(fullUrl, "application/json", responseBody)
+			//Handle Error
+			if err != nil {
+				log.Fatalf("An Error Occured %v", err)
+			}
+			defer resp.Body.Close()
 		}
 	}
 

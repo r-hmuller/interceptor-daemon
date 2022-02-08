@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"strings"
 )
 
 func GetRegistry() string {
@@ -9,7 +10,7 @@ func GetRegistry() string {
 }
 
 func GetStateManagerUrl() string {
-	return os.Getenv("STATE_MANAGER")
+	return strings.TrimRight(os.Getenv("STATE_MANAGER"), "/")
 }
 
 func GetLoggingPath() string {
