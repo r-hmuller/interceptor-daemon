@@ -1,22 +1,42 @@
 package main
 
 import (
-	"os"
 	"strings"
 )
 
+var registry string
+var stateManager string
+var loggingPath string
+var containerdPath string
+
 func GetRegistry() string {
-	return os.Getenv("REGISTRY")
+	return registry
+}
+
+func SetRegistry(reg string) {
+	registry = reg
 }
 
 func GetStateManagerUrl() string {
-	return strings.TrimRight(os.Getenv("STATE_MANAGER"), "/")
+	return strings.TrimRight(stateManager, "/")
+}
+
+func SetStateManagerUrl(url string) {
+	stateManager = url
 }
 
 func GetLoggingPath() string {
-	return os.Getenv("LOGGING_PATH")
+	return loggingPath
+}
+
+func SetLoggingPath(path string) {
+	loggingPath = path
 }
 
 func GetContainerdPath() string {
-	return os.Getenv("CONTAINERD_PATH")
+	return containerdPath
+}
+
+func SetContainerdPath(path string) {
+	containerdPath = path
 }

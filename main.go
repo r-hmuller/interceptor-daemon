@@ -4,9 +4,16 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"log"
+	"os"
 )
 
 func main() {
+	//Ordem: 1 - containerdPath 2 - loggingPath 3 - stateManager 4 - registry
+	argsWithoutProg := os.Args[1:]
+	SetContainerdPath(argsWithoutProg[0])
+	SetLoggingPath(argsWithoutProg[1])
+	SetStateManagerUrl(argsWithoutProg[2])
+	SetRegistry(argsWithoutProg[3])
 	app := fiber.New()
 
 	// GET /john
