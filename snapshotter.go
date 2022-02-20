@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-func GenerateSnapshot(service Snapshot) {
+func GenerateSnapshot(service Snapshot) string {
 	startTime := time.Now().Unix()
 	// create a new client connected to the default socket path for containerd
 	client, err := containerd.New(GetContainerdPath())
@@ -32,6 +32,7 @@ func GenerateSnapshot(service Snapshot) {
 		panic(err)
 	}
 
+	port := ""
 	for _, container := range containers {
 		labels, _ := container.Labels(ctx)
 		if labels["io.kubernetes.pod.name"] == service.Container {
@@ -63,6 +64,11 @@ func GenerateSnapshot(service Snapshot) {
 				log.Fatalf("An Error Occured %v", err)
 			}
 			defer resp.Body.Close()
+
+			port, err = DeployNewContainer(service.YamString, containerSnapshotVersion, service.Service)
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 	}
 
@@ -83,4 +89,6 @@ func GenerateSnapshot(service Snapshot) {
 	if _, err = f.WriteString(strconv.FormatInt(deltaTime, 10)); err != nil {
 		panic(err)
 	}
+
+	return port
 }

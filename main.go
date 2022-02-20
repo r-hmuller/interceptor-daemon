@@ -35,9 +35,9 @@ func main() {
 			})
 		}
 
-		GenerateSnapshot(body)
+		port := GenerateSnapshot(body)
 
-		return c.SendString("ok")
+		return c.SendString(port)
 	})
 
 	app.Post("/restore", func(c *fiber.Ctx) error {
