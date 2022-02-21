@@ -9,8 +9,8 @@ var stateManager string
 var loggingPath string
 var containerdPath string
 
-func GetRegistry() string {
-	return registry
+func GetRegistry(service string) string {
+	return registry + "/" + service
 }
 
 func SetRegistry(reg string) {
