@@ -24,7 +24,7 @@ func Restore(service Snapshot) {
 	}
 	defer client.Close()
 	ctx := namespaces.WithNamespace(context.Background(), service.Namespace)
-	registry := GetRegistry()
+	registry := GetRegistry(service.Service)
 	containerSnapshotVersion := registry + ":" + latestSnapshot
 	checkpoint, err := client.Pull(ctx, containerSnapshotVersion)
 

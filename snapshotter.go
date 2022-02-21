@@ -45,7 +45,7 @@ func GenerateSnapshot(service Snapshot) string {
 				panic(err)
 			}
 
-			registry := GetRegistry()
+			registry := GetRegistry(service.Service)
 			containerSnapshotVersion := registry + ":" + uuid.NewString()
 			err = client.Push(ctx, containerSnapshotVersion, checkpoint.Target())
 			if err != nil {
