@@ -1,8 +1,8 @@
 package main
 
 type Snapshot struct {
-	Namespace string
-	Container string
-	Service   string
-	YamString string
+	Namespace  string
+	Container  string
+	Service    string
+	YamlString string
 }

@@ -68,7 +68,7 @@ func GenerateSnapshot(service Snapshot) string {
 			}
 			defer resp.Body.Close()
 
-			port, err = DeployNewContainer(service.YamString, containerSnapshotVersion, service.Service)
+			port, err = DeployNewContainer(service.YamlString, containerSnapshotVersion, service.Service)
 			if err != nil {
 				log.Fatal(err)
 			}
