@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/containerd/containerd"
 	"github.com/containerd/containerd/cio"
 	"github.com/containerd/containerd/namespaces"
@@ -16,6 +17,7 @@ import (
 )
 
 func GenerateSnapshot(service Snapshot) string {
+	fmt.Println("Starting snapshot")
 	startTime := time.Now().Unix()
 	// create a new client connected to the default socket path for containerd
 	client, err := containerd.New(GetContainerdPath())
@@ -90,5 +92,6 @@ func GenerateSnapshot(service Snapshot) string {
 		panic(err)
 	}
 
+	fmt.Println("Finishing snapshot")
 	return port
 }
