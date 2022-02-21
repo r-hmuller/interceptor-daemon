@@ -23,6 +23,7 @@ func main() {
 	})
 
 	app.Post("/snapshot", func(c *fiber.Ctx) error {
+		fmt.Println("Entrei no snapshot")
 		var body Snapshot
 		err := c.BodyParser(&body)
 
@@ -41,6 +42,7 @@ func main() {
 	})
 
 	app.Post("/restore", func(c *fiber.Ctx) error {
+		fmt.Println("Entrei no restore")
 		var body Snapshot
 		err := c.BodyParser(&body)
 
