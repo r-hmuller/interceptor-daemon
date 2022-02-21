@@ -36,6 +36,7 @@ func GenerateSnapshot(service Snapshot) string {
 
 	port := ""
 	for _, container := range containers {
+		fmt.Println(container.Labels(ctx))
 		labels, _ := container.Labels(ctx)
 		if labels["io.kubernetes.pod.name"] == service.Container {
 			task, err := container.Task(ctx, cio.NewAttach(cio.WithStdio))
