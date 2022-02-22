@@ -22,6 +22,7 @@ func GenerateSnapshot(service Snapshot) string {
 	// create a new client connected to the default socket path for containerd
 	client, err := containerd.New(GetContainerdPath())
 	if err != nil {
+		fmt.Println(err)
 		panic(err)
 	}
 	defer client.Close()
@@ -31,6 +32,7 @@ func GenerateSnapshot(service Snapshot) string {
 
 	containers, err := client.Containers(ctx)
 	if err != nil {
+		fmt.Println(err)
 		panic(err)
 	}
 
